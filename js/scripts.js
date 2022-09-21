@@ -15,3 +15,8 @@ let pokemonList = [
     abilities: ['Damp', 'Effect-spore']
   }
 ];
+//Pokemon Forloop//
+for (let i=0; i < pokemonList.length; i++)
+  if(pokemonList[i]){
+    document.write(pokemonList[i].name)
+  }
