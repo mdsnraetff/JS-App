@@ -17,9 +17,9 @@ let pokemonList = [
 ];
 //Pokemon Forloop//
 for (let i=0; i < pokemonList.length; i++)
-  if(pokemonList[i].height > 0.5){
-    document.write(pokemonList[i].name+''+'height:' + pokemonList[i].height +' What a big guy!');
+  if(pokemonList[i].height > 0.7){
+    document.write(pokemonList[i].name+' ' + 'height: ' + pokemonList[i].height + ' - What a big guy!' + '<br>');
   }
   else {
-    document.write(pokemonList[i].name + ' ' + 'height:' + pokemonList[i].height);
+    document.write(pokemonList[i].name + ' ' + 'height: ' + pokemonList[i].height + '<br>');
   }
