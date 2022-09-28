@@ -1,5 +1,5 @@
-
-let pokemonList = [
+let pokemonRepository =(function(){
+  let pokemonList =[
   {
     name: "Bulbasaur",
     height: 0.7,
@@ -15,16 +15,26 @@ let pokemonList = [
     height: 0.3,
     abilities: ['Damp', 'Effect-spore']
   }
-];
+]
 
-pokemonList.forEach(function(pokemon){
+function getAll() {
+  return pokemonList;
+}
+
+pokemonRepository.add({
+  name: "Nidoking",
+  height: 1.4,
+  abilities: ['Poison', 'Force']
+})
+
+pokemonRepository.getAll().forEach(function(pokemon){
   if(pokemon.height > 0.7){
     document.write(pokemon.name + ' (height: '+ pokemon.height + ') - What a big guy!' + '<br>')
   }
   else {
     document.write(pokemon.name + ' (height: '+ pokemon.height+ ') <br>')
   }
-})
+})})
 
 //Pokemon Forloop// Older code - saving just in case
 // for (let i=0; i < pokemonList.length; i++)
