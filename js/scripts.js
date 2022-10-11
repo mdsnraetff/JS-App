@@ -1,5 +1,5 @@
 let pokemonRepository =(function(){
-  let pokemonList =[
+  let repository =[
   {
     name: "Bulbasaur",
     height: 0.7,
@@ -18,16 +18,35 @@ let pokemonRepository =(function(){
 ]
 
   function getAll () {
-    return pokemonList;
+    return repository;
   }
 
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    repository.push(pokemon);
+  }
+
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('pokemon-button');
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem);
+    button.addEventListener('click', function(showDetails) {
+      console.log(pokemon.name);
+    });
+
+  }
+
+  function showDetails(){
+    console.log(pokemon.name);
   }
 
   return {
     getAll: getAll,
-    add: add
+    add: add,
+    addListItem: addListItem,
   }
 
 })()
@@ -37,25 +56,8 @@ pokemonRepository.add({
   height: 1.4,
   abilities: ['Poison', 'Force']
 })
+console.log(pokemonRepository.getAll());
 
 pokemonRepository.getAll().forEach(function(pokemon){
-  if(pokemon.height > 0.7){
-    document.write(pokemon.name + ' (height: '+ pokemon.height + ') - What a big guy!' + '<br>')
-  }
-  else {
-    document.write(pokemon.name + ' (height: '+ pokemon.height+ ') <br>')
-  }
-})()
-
-
-
-
-
-//Pokemon Forloop// Older code - saving just in case
-// for (let i=0; i < pokemonList.length; i++)
-//  if(pokemonList[i].height > 0.7){
-//    document.write(pokemonList[i].name+' ' + '(height: ' + pokemonList[i].height + ') - What a big guy!' + '<br>');
-//  }
-//  else {
-//    document.write(pokemonList[i].name + ' ' + '(height: ' + pokemonList[i].height + ')<br>');
-//  }
+  pokemonRepository.addListItem(pokemon);
+})
