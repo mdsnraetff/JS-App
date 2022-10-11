@@ -17,9 +17,20 @@ let pokemonRepository =(function(){
   }
 ]
 
-function getAll() {
-  return pokemonList;
-}
+  function getAll () {
+    return pokemonList;
+  }
+
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+  return {
+    getAll: getAll,
+    add: add
+  }
+
+})()
 
 pokemonRepository.add({
   name: "Nidoking",
@@ -34,7 +45,11 @@ pokemonRepository.getAll().forEach(function(pokemon){
   else {
     document.write(pokemon.name + ' (height: '+ pokemon.height+ ') <br>')
   }
-})})
+})()
+
+
+
+
 
 //Pokemon Forloop// Older code - saving just in case
 // for (let i=0; i < pokemonList.length; i++)
