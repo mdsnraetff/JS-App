@@ -1,32 +1,30 @@
 let pokemonRepository =(function(){
-  let repository =[
-  {
-    name: "Bulbasaur",
-    height: 0.7,
-    abilities: ['Chlorophyll', 'Overgrow']
-  },
-  {
-    name: "Sandslash",
-    height: 1,
-    abilities: ['Sand-veil', 'Sand-rush']
-  },
-  {
-    name: "Paras",
-    height: 0.3,
-    abilities: ['Damp', 'Effect-spore']
+  let pokemonList =[];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
+  function add(pokemon){
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon
+    ){
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
   }
-]
 
   function getAll () {
-    return repository;
+    return pokemonList;
   }
 
   function add(pokemon) {
-    repository.push(pokemon);
+    pokemonList.push(pokemon);
   }
 
   function showDetails(pokemon){
-    console.log(pokemon.name)
+    loadDetails(pokemon).then(function (){
+      console.log(pokemon);
+    })
   }
 
   function addListItem(pokemon) {
@@ -37,29 +35,54 @@ let pokemonRepository =(function(){
     button.classList.add('pokemon-button');
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(event) {
       showDetails(pokemon);
     });
 
   }
 
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
 
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
 
   return {
     getAll: getAll,
     add: add,
     addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   }
 
 })()
 
-pokemonRepository.add({
-  name: "Nidoking",
-  height: 1.4,
-  abilities: ['Poison', 'Force']
-})
-console.log(pokemonRepository.getAll());
-
-pokemonRepository.getAll().forEach(function(pokemon){
-  pokemonRepository.addListItem(pokemon);
-})
+pokemonRepository.loadList().then(function(){
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
+});
