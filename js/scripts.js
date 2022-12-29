@@ -21,7 +21,7 @@ let pokemonRepository =(function(){
 
   function addListItem(pokemon) {
     let listItem = $('<li class="list-group-item"></li>');
-    let button = $('<button class="pokemon-button btn btn-warning" data target="#modal-container" data-toggle="modal">' + pokemon.name + '</button>');
+    let button = $('<button class="pokemon-button btn btn-warning" data-target="#modal-container" data-toggle="modal">' + pokemon.name + '</button>');
     listItem.append(button);
     pokemonListElement.append(listItem);
     button.on('click', function(){
@@ -74,8 +74,8 @@ let pokemonRepository =(function(){
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
     let modalHeader = $(".modal-header");
-    let modalContainer = document.querySelector('#modal-container');
-    modalContainer.classList.add('is-visible');
+    /*$('#modal-container').modal('show');*/
+    
    
 
    modalTitle.empty();
