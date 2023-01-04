@@ -53,12 +53,13 @@
 .pokedex {
   text-align: center;
   text-transform: capitalize;
+  
 }
 
 .pokemon-button {
   text-transform: capitalize;
-  background-color: #bdb76b;
-  border-color: #556b2f;
+  background-color: #4dad62;
+  border-color: #304a38;
   transition: none;
 }
 
