@@ -6,12 +6,9 @@ let pokemonRepository =(function(){
   function getAll () {
     return pokemonList;
   }
-
   function add(pokemon) {
     pokemonList.push(pokemon);
   }
-
-
   function addListItem(pokemon) {
     let listItem = $('<li class="list-group-item"></li>');
     let button = $('<button class="pokemon-button btn btn-light" data-target="#modal-container" data-toggle="modal">' + pokemon.name + '</button>');
@@ -21,7 +18,6 @@ let pokemonRepository =(function(){
       showDetails(pokemon);
     });
   } 
-
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -37,7 +33,6 @@ let pokemonRepository =(function(){
       console.error(e);
     })
   }
-
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -50,16 +45,11 @@ let pokemonRepository =(function(){
       console.error(e);
     });
   }
-
-    
- 
-
   function showDetails(pokemon){
     loadDetails(pokemon).then(function (){
       showDetailsModal(pokemon);
     })
   }
-
 
 /* pokemon Modal */
 
@@ -67,12 +57,8 @@ let pokemonRepository =(function(){
     let modalBody = $('.modal-body');
     let modalTitle = $('.modal-title');
     let modalHeader = $('.modal-header');
-
    modalTitle.empty();
    modalBody.empty();
-
- 
-
     let pokemonHeight = $('<p>' + 'Height: ' + pokemon.height + '</p>');
 
     let pokemonName = $('<h1>' + pokemon.name + '</h1>');
@@ -80,8 +66,6 @@ let pokemonRepository =(function(){
     let pokemonPicture = $('<img class="pokemon-img" src="' + pokemon.imageUrl +'"/>');
 
     let typesElement = $('<p>' + 'Types: ' + pokemon.types + '</p>');
-
-
     modalTitle.append(pokemonName);
     modalBody.append(typesElement);
     modalBody.append(pokemonPicture);
